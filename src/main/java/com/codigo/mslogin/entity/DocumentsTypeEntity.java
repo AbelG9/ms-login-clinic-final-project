@@ -2,7 +2,7 @@ package com.codigo.mslogin.entity;
 
 import com.codigo.mslogin.aggregates.model.Audit;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 

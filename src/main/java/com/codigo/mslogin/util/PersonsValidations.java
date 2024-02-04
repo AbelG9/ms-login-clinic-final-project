@@ -28,10 +28,20 @@ public class PersonsValidations {
         if (Util.isNullOrEmpty(requestPersons.getEmail()) || Util.isNullOrEmpty(requestPersons.getPhoneNumber())) {
             return false;
         }
-        return isUpdate || !existsPerson(requestPersons.getNumDocument());
+        if (!isUpdate) {
+            if (existsPersonByEmail(requestPersons.getEmail())) {
+                return false;
+            }
+            return !existsPerson(requestPersons.getNumDocument());
+        }
+        return true;
     }
 
     public boolean existsPerson(String numDocument) {
         return personsRepository.existsByNumDocument(numDocument);
+    }
+
+    public boolean existsPersonByEmail(String email) {
+        return personsRepository.existsPersonByEmail(email);
     }
 }
