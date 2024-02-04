@@ -36,7 +36,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(SignatureAlgorithm.ES256, secretToken)
+                .signWith(SignatureAlgorithm.HS256, secretToken)
                 .compact();
     }
     public String generateToken(String username, String role){

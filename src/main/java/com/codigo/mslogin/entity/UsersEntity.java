@@ -23,10 +23,10 @@ public class UsersEntity extends Audit {
     private String username;
     @Column(name = "password", length = 250, nullable = false)
     private String password;
+    @Column(name = "role", length = 45, nullable = false)
+    private String role;
     @Column(name = "status", nullable = false)
     private int status;
-    @Column(name = "role", nullable = false)
-    private String role;
     @OneToOne
     @JoinColumn(name = "persons_id_persons", nullable = false)
     private PersonsEntity personsEntity;

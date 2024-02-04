@@ -27,7 +27,7 @@ public class UsersController {
         return usersService.login(requestUsers);
     }
 
-    @GetMapping("/todos")
+    @GetMapping
     public List<UsersEntity> findAllUsers() {
        return usersService.findAllUsers();
     }

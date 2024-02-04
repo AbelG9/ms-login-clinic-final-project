@@ -21,10 +21,10 @@ public class CustomerDetailService implements UserDetailsService {
     private UsersEntity usersEntity;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UsersEntity> usersEntity1 = usersRepository.findByUsername(username);
-        if(usersEntity1.isPresent())
+        usersEntity = usersRepository.findByUsername(username).orElse(null);
+        if(usersEntity != null)
         {
-            return new User(usersEntity1.get().getUsername(), usersEntity1.get().getPassword(), new ArrayList<>());
+            return new User(usersEntity.getUsername(), usersEntity.getPassword(), new ArrayList<>());
         }
         else{
             throw new UsernameNotFoundException("Usuario no encontrado");

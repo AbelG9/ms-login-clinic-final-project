@@ -60,7 +60,8 @@ public class UsersServiceImpl implements UsersService {
                     .authenticate(new UsernamePasswordAuthenticationToken(requestUsers.getUsername(),requestUsers.getPassword()));
             if (authentication.isAuthenticated()) {
                 if (customerDetailService.getUsersEntity().getStatus() == Constants.STATUS_ACTIVE) {
-                    return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, Optional.of(jwtUtil.generateToken(customerDetailService.getUsersEntity().getUsername(), customerDetailService.getUsersEntity().getRole())));
+                    String token = jwtUtil.generateToken(customerDetailService.getUsersEntity().getUsername(), customerDetailService.getUsersEntity().getRole());
+                    return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, Optional.of(token));
                 } else {
                     return new ResponseBase(Constants.CODE_ERROR_DATA_INPUT, Constants.MESSAGE_ERROR_USER_INACTIVE, Optional.empty());
                 }
