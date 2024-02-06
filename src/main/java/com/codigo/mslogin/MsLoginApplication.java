@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.codigo.*")
 @EnableFeignClients("com.codigo.mslogin")
 @ImportAutoConfiguration({FeignAutoConfiguration.class})
 public class MsLoginApplication {

@@ -1,5 +1,6 @@
 package com.codigo.mslogin.service.impl;
 
+import com.codigo.appointmentslibrary.config.RedisService;
 import com.codigo.appointmentslibrary.constants.Constants;
 import com.codigo.appointmentslibrary.response.ResponseBase;
 import com.codigo.appointmentslibrary.util.Util;
@@ -24,12 +25,14 @@ public class PersonsServiceImpl implements PersonsService {
     private final PersonsRepository personsRepository;
     private final PersonsValidations personsValidations;
     private final DocumentsTypeRepository documentsTypeRepository;
+    private final RedisService redisService;
 
-    public PersonsServiceImpl(ReniecClient reniecClient, PersonsRepository personsRepository, PersonsValidations personsValidations, DocumentsTypeRepository documentsTypeRepository) {
+    public PersonsServiceImpl(ReniecClient reniecClient, PersonsRepository personsRepository, PersonsValidations personsValidations, DocumentsTypeRepository documentsTypeRepository, RedisService redisService) {
         this.reniecClient = reniecClient;
         this.personsRepository = personsRepository;
         this.personsValidations = personsValidations;
         this.documentsTypeRepository = documentsTypeRepository;
+        this.redisService = redisService;
     }
 
     @Value("${token.api.reniec}")
@@ -67,21 +70,37 @@ public class PersonsServiceImpl implements PersonsService {
 
     @Override
     public ResponseBase findOnePersonById(int id) {
-        Optional<PersonsEntity> person = personsRepository.findById(id);
-        if (person.isPresent()) {
-            return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, person);
+        String redisCache = redisService.getValueFromCache(Constants.REDIS_KEY_INFO_PERSONS+id);
+        if(redisCache != null){
+            PersonsEntity personsEntity = Util.convertFromJson(redisCache, PersonsEntity.class);
+            return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, Optional.of(personsEntity));
         } else {
-            return new ResponseBase(Constants.CODE_ERROR_DATA_NOT, Constants.MESSAGE_ZERO_ROWS, Optional.empty());
+            Optional<PersonsEntity> person = personsRepository.findById(id);
+            if (person.isPresent()) {
+                String redisData = Util.convertToJsonEntity(person.get());
+                redisService.saveInCache(Constants.REDIS_KEY_INFO_PERSONS+id,redisData);
+                return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, person);
+            } else {
+                return new ResponseBase(Constants.CODE_ERROR_DATA_NOT, Constants.MESSAGE_ZERO_ROWS, Optional.empty());
+            }
         }
     }
 
     @Override
     public ResponseBase findOnePersonByDocument(String doc) {
-        Optional<PersonsEntity> person = personsRepository.findByNumDocument(doc);
-        if (person.isPresent()) {
-            return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, person);
+        String redisCache = redisService.getValueFromCache(Constants.REDIS_KEY_INFO_PERSONS_BY_DOC+doc);
+        if(redisCache != null){
+            PersonsEntity personsEntity = Util.convertFromJson(redisCache, PersonsEntity.class);
+            return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, Optional.of(personsEntity));
         } else {
-            return new ResponseBase(Constants.CODE_ERROR_DATA_NOT, Constants.MESSAGE_ZERO_ROWS, Optional.empty());
+            Optional<PersonsEntity> person = personsRepository.findByNumDocument(doc);
+            if (person.isPresent()) {
+                String redisData = Util.convertToJsonEntity(person.get());
+                redisService.saveInCache(Constants.REDIS_KEY_INFO_PERSONS_BY_DOC+doc,redisData);
+                return new ResponseBase(Constants.CODE_SUCCESS, Constants.MESSAGE_SUCCESS, person);
+            } else {
+                return new ResponseBase(Constants.CODE_ERROR_DATA_NOT, Constants.MESSAGE_ZERO_ROWS, Optional.empty());
+            }
         }
     }
 
