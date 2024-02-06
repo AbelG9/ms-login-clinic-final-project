@@ -1,8 +1,9 @@
 package com.codigo.mslogin.service.impl;
 
+import com.codigo.appointmentslibrary.constants.Constants;
+import com.codigo.appointmentslibrary.response.ResponseBase;
+import com.codigo.appointmentslibrary.util.Util;
 import com.codigo.mslogin.aggregates.request.RequestUsers;
-import com.codigo.mslogin.aggregates.response.ResponseBase;
-import com.codigo.mslogin.constants.Constants;
 import com.codigo.mslogin.entity.PersonsEntity;
 import com.codigo.mslogin.entity.UsersEntity;
 import com.codigo.mslogin.repository.PersonsRepository;
@@ -11,7 +12,6 @@ import com.codigo.mslogin.security.CustomerDetailService;
 import com.codigo.mslogin.security.jwt.JwtUtil;
 import com.codigo.mslogin.service.UsersService;
 import com.codigo.mslogin.util.UsersValidation;
-import com.codigo.mslogin.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

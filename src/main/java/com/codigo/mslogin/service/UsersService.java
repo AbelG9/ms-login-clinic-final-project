@@ -1,7 +1,7 @@
 package com.codigo.mslogin.service;
 
+import com.codigo.appointmentslibrary.response.ResponseBase;
 import com.codigo.mslogin.aggregates.request.RequestUsers;
-import com.codigo.mslogin.aggregates.response.ResponseBase;
 import com.codigo.mslogin.entity.UsersEntity;
 
 import java.util.List;

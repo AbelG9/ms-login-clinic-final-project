@@ -1,7 +1,7 @@
 package com.codigo.mslogin.controller;
 
+import com.codigo.appointmentslibrary.response.ResponseBase;
 import com.codigo.mslogin.aggregates.request.RequestPersons;
-import com.codigo.mslogin.aggregates.response.ResponseBase;
 import com.codigo.mslogin.service.PersonsService;
 import org.springframework.web.bind.annotation.*;
 

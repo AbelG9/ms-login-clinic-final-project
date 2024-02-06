@@ -1,9 +1,10 @@
 package com.codigo.mslogin.service.impl;
 
+import com.codigo.appointmentslibrary.constants.Constants;
+import com.codigo.appointmentslibrary.response.ResponseBase;
+import com.codigo.appointmentslibrary.util.Util;
 import com.codigo.mslogin.aggregates.request.RequestPersons;
-import com.codigo.mslogin.aggregates.response.ResponseBase;
 import com.codigo.mslogin.aggregates.response.ResponseReniec;
-import com.codigo.mslogin.constants.Constants;
 import com.codigo.mslogin.entity.DocumentsTypeEntity;
 import com.codigo.mslogin.entity.PersonsEntity;
 import com.codigo.mslogin.feignclient.ReniecClient;
@@ -11,7 +12,6 @@ import com.codigo.mslogin.repository.DocumentsTypeRepository;
 import com.codigo.mslogin.repository.PersonsRepository;
 import com.codigo.mslogin.service.PersonsService;
 import com.codigo.mslogin.util.PersonsValidations;
-import com.codigo.mslogin.util.Util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

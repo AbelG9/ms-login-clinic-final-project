@@ -1,7 +1,8 @@
 package com.codigo.mslogin.util;
 
+import com.codigo.appointmentslibrary.constants.Constants;
+import com.codigo.appointmentslibrary.util.Util;
 import com.codigo.mslogin.aggregates.request.RequestPersons;
-import com.codigo.mslogin.constants.Constants;
 import com.codigo.mslogin.entity.DocumentsTypeEntity;
 import com.codigo.mslogin.repository.DocumentsTypeRepository;
 import com.codigo.mslogin.repository.PersonsRepository;

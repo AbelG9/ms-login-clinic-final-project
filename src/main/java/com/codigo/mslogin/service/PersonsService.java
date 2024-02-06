@@ -1,7 +1,7 @@
 package com.codigo.mslogin.service;
 
+import com.codigo.appointmentslibrary.response.ResponseBase;
 import com.codigo.mslogin.aggregates.request.RequestPersons;
-import com.codigo.mslogin.aggregates.response.ResponseBase;
 
 public interface PersonsService {
     ResponseBase getInfoReniec(String numero);
