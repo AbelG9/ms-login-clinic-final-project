@@ -15,6 +15,20 @@
 	<description>Project for login to clinic system</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
+		<sonar.host.url>http://localhost:9000/</sonar.host.url>
+		<sonar.projectKey>exa2</sonar.projectKey>
+		<sonar.projectName>exa2</sonar.projectName>
+
+		<!-- Exclusión de archivos -->
+		<sonar.exclusions>
+			**/MsLoginApplication.java,
+			**/PersonsController.java,
+			**/UsersController.java,
+			**/UsersValidation.java,
+			**/PersonsValidations.java,
+			**/MsLoginApplicationTests.java
+		</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
